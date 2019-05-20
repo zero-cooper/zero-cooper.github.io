@@ -13,12 +13,14 @@
 
         <!-- You can turn off the avatar in _config.yml by setting to false -->
         {% if site.resume_avatar == 'true' %}
+		<br>
         <img src="images/photo-czy.jpg" alt="my photo" width="112.5" height="150" align ="right">
 		<!-- Your name is defined in the _config.yml file -->
         <h1 class="header-name" itemprop="name">{{ site.resume_name }}</h1>
 
         <!-- To display contact info here, change `display_header_contact_info` value in _config.yml to true -->
         {% if site.display_header_contact_info == 'true' %}
+		<br>
         <div class="header-contact-info">
           <p>{{ site.resume_header_contact_info }}</p>
         </div>
