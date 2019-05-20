@@ -1,16 +1,20 @@
 # Projects
 # uncomment the urls if you wish to display them, and add your own URL
-
-# jazznotes.io
-- project: jazznotes.io
-  role: Founder & Primary Developer
-  duration: 2012 &mdash; Present
+- project: Data Mining for Energy Usage in Informatics Forum
+  role: Group project
+  duration: 2019.03 &mdash; 2019.04
   # url: "#"
-  description: Jazz Notes is an open source node/ember app that helps you keep track of your music compositions and new ideas.
+  description: <ul><li>Predict energy usage in Informatics Forum based on various features over 2 years data;</li><li>Supervised by Dr. Arno Onken.</li></ul>
 
-# Springfield Community Outreach Group
-- project: Springfield Community Outreach Group
-  role: Co-Founder & Organizer
-  duration: 2007 &mdash; Present
+
+- project: Game Agents Exploration with Proximal Policy Optimization
+  role: Group project
+  duration: 2019.01 &mdash; 2019.04
   # url: "#"
-  description: SCOG is a local monthly meetup in Springfield where we share opportunities to volunteer in the community and organize support for families and neighborhoods in need of assistance that the community can provide.
+  description: <ul><li>A self-learning agent (world model) with PPO-based controller on game 'Sonic 3 & Knuckles' based on pytorch;</li><li>Supervised by Antreas Antoniou (TA).</li></ul>
+
+- project: Intelligent Remote-controlled Figure-traceable Camera on Raspberry PI
+  role: Group project
+  duration: 2017.11 &mdash; 2018.01
+  description: <ul><li>Intelligent home system design&#58 Capture visitor's face, transmit to house-owner's mobile terminal and trace the visitor;</li><li>Supervised by Prof. Shengshou Zhao.</li></ul>
+  
