@@ -1,12 +1,9 @@
 # Skills
-# Organizational leadership
+- skill: programming language
+  description: Python (Pytorch, Scikit-learn, Keras, NLTK) > C language > Assembly > HTML
+
+- skill: Digital content development and IT related
+  description: Object-Oriented Programming, web design, front web development
+
 - skill: Organizational leadership
-  description: I have several years of experience leading organziations from community groups to business departments. From public speaking, to mentoring, to coordination of people and events, I can lead in any context.
-
-# Communications strategy
-- skill: Communications strategy
-  description: Content and marketing strategy,
-
-# Digital content development and creation
-- skill: Digital content development and creation
-  description: Copy writing, graphic design, web design, front-end web development, print design
+  description: Years of experience organizing academic conference in Model United Nations; Team leader for many group projects.
