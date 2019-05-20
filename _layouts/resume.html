@@ -13,10 +13,8 @@
 
         <!-- You can turn off the avatar in _config.yml by setting to false -->
         {% if site.resume_avatar == 'true' %}
-        <img src="images/avatar.jpg" alt="my photo" class="avatar no-print" itemprop="image">
-        {% endif %}
-
-        <!-- Your name is defined in the _config.yml file -->
+        <img src="images/photo-czy.jpg" alt="my photo" width="112.5" height="150" align ="right">
+		<!-- Your name is defined in the _config.yml file -->
         <h1 class="header-name" itemprop="name">{{ site.resume_name }}</h1>
 
         <!-- To display contact info here, change `display_header_contact_info` value in _config.yml to true -->
@@ -24,6 +22,7 @@
         <div class="header-contact-info">
           <p>{{ site.resume_header_contact_info }}</p>
         </div>
+        {% endif %}
         {% endif %}
 
         <div class="title-bar no-print">
@@ -48,28 +47,8 @@
 
       </header>
 
-      {% if site.resume_section_experience %}
-      <!-- begin Experience -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Experience</h2>
-        </header>
-
-        {% for job in site.data.experience %}
-        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
-          <h3 class="resume-item-title" itemprop="name">{{ job.company }}</h3>
-          <h4 class="resume-item-details" itemprop="description">{{ job.position }} &bull; {{ job.duration }}</h4>
-          <p class="resume-item-copy">{{ job.summary }}</p>
-        </div><!-- end of resume-item -->
-        {% endfor %}
-
-      </section>
-      <!-- end Experience -->
-      {% endif %}
-
-
-      {% if site.resume_section_education %}
+	  
+	  {% if site.resume_section_education %}
       <!-- begin Education -->
       <section class="content-section">
         <header class="section-header">
@@ -117,6 +96,29 @@
       <!-- end Projects -->
       {% endif %}
 
+	  
+	  {% if site.resume_section_experience %}
+      <!-- begin Experience -->
+      <section class="content-section">
+
+        <header class="section-header">
+          <h2>Experience</h2>
+        </header>
+
+        {% for job in site.data.experience %}
+        <div class="resume-item" itemscope itemprop="worksFor" itemtype="http://schema.org/Organization">
+          <h3 class="resume-item-title" itemprop="name">{{ job.company }}</h3>
+          <h4 class="resume-item-details" itemprop="description">{{ job.position }} &bull; {{ job.duration }}</h4>
+          <p class="resume-item-copy">{{ job.summary }}</p>
+        </div><!-- end of resume-item -->
+        {% endfor %}
+
+      </section>
+      <!-- end Experience -->
+      {% endif %}
+
+
+      
       {% if site.resume_section_skills %}
       <!-- begin Skills -->
       <section class="content-section">
@@ -232,8 +234,8 @@
       {% endif %}
 
       <footer class="page-footer">
-        <p class="footer-line">Made by <a href="http://twitter.com/jglovier">@jglovier</a>. Fork me on <a href="https://github.com/jglovier/resume-template">GitHub</a>.</p>
-        <p class="footer-line">If this is your live resume, you can modify or remove this part. ;-)</p>
+        <p class="footer-line">Made by <a href="https://www.facebook.com/ziyue.chu.1">@Ziyue Chu</a>. Fork me on <a href="https://github.com/zero-cooper">GitHub</a>.</p>
+        <p class="footer-line">Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://pages.github.com">github pages</a>. Updated&#58 Mon May 20 2019. © Copyright 2019 Ziyue Chu.</p>
       </footer>
 
     </div>
