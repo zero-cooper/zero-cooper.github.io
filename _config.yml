@@ -24,14 +24,13 @@ resume_header_contact_info:     "Flat 6, Buccleuch Place, Edinburgh, UK, EH8 9NT
                                 zero-cooper@foxmail.com | +(44) 07492638362 "
 display_header_contact_info:    "true"
 
-resume_header_intro: "<p>Informatics postgraduate student with solid mathematical background and rich project programming experience. Looking for AI related research jobs and further Ph.D study.
+resume_header_intro: "<p>Informatics postgraduate student with solid mathematical background and rich project programming experience. Looking for an AI research job and further Ph.D study.
 <br> </p>
-<p>I am interested in research topics relevant to&#58 <br>
+<p>I am interested in the field of Game AI and more specificaly in but not limited to the following topics &#58 <br>
 <ul>
-  <li>Quantum Machine Learning.</li>
-  <li>Deep learning system reliability.</li>
-  <li>Markov Decision Process (MDP) theory and application with multi-agent cooperation and competition.</li>
-  <li>Algorithmic Game theory application for agent's decision guidance on large video game environment.</li>
+  <li>Probabilistic Reinforcement Learning in Board Games.</li>
+  <li>Deep learning system explainablity & reliability.</li>
+  <li>Markov Decision Process (MDP) and policy-based model for multi-agent cooperation and competition.</li>
 </ul>  
 </p>"
 
