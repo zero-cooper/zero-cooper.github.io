@@ -1,20 +1,31 @@
 # Projects
 # uncomment the urls if you wish to display them, and add your own URL
+- project: Deep Q Learning for SpaceInvader Atari Game Environment
+  role: Self project
+  duration: 2020.10 &mdash; 2020.12 <b>[Game AI & Reinforcement Learning]</b>
+  # url: "#"
+  description: <ul><li>DQN model was implemented in SpaceInvader Atari Game Environment to evaluate Q value in a given state;</li><li>TD error was estimated to optimize the 3-layer convolutional DQN in Pytorch;</li><li>An experience replay memory class was implemented to exploit past experience and reduce correlation.</li></ul>
+
+- project: Realization of two Game Environments
+  role: Self project
+  duration: 2020.9 &mdash; 2020.11 <b>[Game AI & Reinforcement Learning]</b>
+  # url: "#"
+  description: <ul><li>A car game to avoid crashes was implemented with Pygame;</li><li>DaVince Code, a popular board game, was simulated in Python for 2 players.</li></ul>
+ 
 - project: Data Mining for Energy Usage in Informatics Forum
   role: Group project
-  duration: 2019.03 &mdash; 2019.04
+  duration: 2019.03 &mdash; 2019.04 <b>[Data Mining & Deep Learning]</b>
   # url: "#"
-  description: <ul><li>Predict energy usage in Informatics Forum based on various features over 2 years data;</li><li>Supervised by Dr. Arno Onken.</li></ul>
-
+  description: <ul><li>Predict energy usage in Informatics Forum based on various features over 2 years data;</li><li>PCA data preprocessing and Ridge Regression with polynomial kernel model;</li><li>Supervised by Dr. Arno Onken.</li></ul>
 
 - project: Game Agents Exploration with Proximal Policy Optimization
   role: Group project
-  duration: 2019.01 &mdash; 2019.04
+  duration: 2019.01 &mdash; 2019.04 <b>[Game AI & Reinforcement Learning]</b>
   # url: "#"
-  description: <ul><li>A self-learning agent (world model) with PPO-based controller on game 'Sonic 3 & Knuckles' based on pytorch;</li><li>Supervised by Antreas Antoniou (TA).</li></ul>
+  description: <ul><li>A self-learning agent (world model) with PPO-based controller for game 'Sonic 3 & Knuckles' based on Pytorch;</li><li>Supervised by Antreas Antoniou (TA).</li></ul>
 
 - project: Intelligent Remote-controlled Figure-traceable Camera on Raspberry PI
   role: Group project
-  duration: 2017.11 &mdash; 2018.01
-  description: <ul><li>Intelligent home system design&#58 Capture visitor's face, transmit to house-owner's mobile terminal and trace the visitor;</li><li>Supervised by Prof. Shengshou Zhao.</li></ul>
+  duration: 2017.11 &mdash; 2018.01 <b>[Deep Learning & Automatic control]</b>
+  description: <ul><li>Intelligent home system design&#58 Capture visitor's face, transmit to house-owner's mobile terminal and trace the visitor;</li><li>A new algorithm transferring RGB image space to YCrCb sapce was implemented to increase the face recognition rate under extreme environment;</li><li>Supervised by Prof. Shengshou Zhao.</li></ul>
   
