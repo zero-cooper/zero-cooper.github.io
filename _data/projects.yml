@@ -1,16 +1,22 @@
 # Projects
 # uncomment the urls if you wish to display them, and add your own URL
-- project: Deep Q Learning for SpaceInvader Atari Game Environment
-  role: Self project
-  duration: 2020.10 &mdash; 2020.12 <b>[Game AI & Reinforcement Learning]</b>
-  # url: "#"
-  description: <ul><li>DQN model was implemented in SpaceInvader Atari Game Environment to evaluate Q value in a given state;</li><li>TD error was estimated to optimize the 3-layer convolutional DQN in Pytorch;</li><li>An experience replay memory class was implemented to exploit past experience and reduce correlation.</li></ul>
 
-- project: Realization of two Game Environments
+- project: Swarm Intelligence with SNN
+  role: Team research project
+  duration: 2021.06 &mdash; 2022.06 <b>[Robotics & SNN & GA & Biology]</b>
+  url: "https://mp.weixin.qq.com/s/iK3g4JmK7e0TwlXtmUuuBQ"
+  description: <ul><li>A fish school interaction environment is simulated and demonstrated in WAIC 2021;</li><li>Virtural robot fish are trained with SNN to live with the fish school and guide its movement with human interaction;</li><li>SNN training structure is optimized by GA to reduce links with low spiking frequency from a fully connected graph.</li></ul>
+
+- project: Data Mining and Analysis for MSD Sales 
+  role: Comercial project
+  duration: 2021.01 &mdash; 2021.06 <b>[Data Mining]</b>
+  description: <ul><li>Annual sales data analysis and anomaly cheat sales sorting for MSD, an international medical company;</li><li>A random forest tree is applied to filter out normal sales records and 2nd distributors;</li><li>A statistical anomaly reasoning module is provided. </li></ul>
+
+- project: Deep Q Learning for SpaceInvader & Simulation of two Game Environments
   role: Self project
-  duration: 2020.9 &mdash; 2020.11 <b>[Game AI & Reinforcement Learning]</b>
+  duration: 2020.09 &mdash; 2020.12 <b>[Game AI & Reinforcement Learning]</b>
   # url: "#"
-  description: <ul><li>A car game to avoid crashes was implemented with Pygame;</li><li>DaVince Code, a popular board game, was simulated in Python for 2 players.</li></ul>
+  description: <ul><li>A DQN model was implemented in SpaceInvader Atari Game Environment;</li><li>TD error was estimated to optimize the 3-layer convolutional DQN in Pytorch;</li><li>An experience replay memory class was implemented to exploit past experience and reduce correlation;</li><li>Implimentation of two Game Environments with Pygame&#58; A car crash avoiding game & DaVince Code, a popular board game.</li></ul>
  
 - project: Data Mining for Energy Usage in Informatics Forum
   role: Group project
