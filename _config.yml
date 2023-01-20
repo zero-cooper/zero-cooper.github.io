@@ -11,26 +11,26 @@ sass:
 # Resume settings
 resume_avatar:                  "true"
 resume_name:                    "Ziyue Chu"
-resume_title:                   "Artificial Intelligence Researcher"
+resume_title:                   "Artificial Intelligence Research Engineer"
 
 # used for the contact button in _layouts/resume.html
 resume_contact_email:           "zero-cooper@foxmail.com"
 
 # the next two items are used for schema itemprops in _layouts/resume.html
-resume_contact_telephone:       "+(44) 07492638362"
-resume_contact_address:         "Flat 6, Buccleuch Place, Edinburgh, UK, EH8 9NT"
+resume_contact_telephone:       "+(86) 17751034681"
+resume_contact_address:         "Room A308, Changyang Campus, 1687 Changyang Rd., Shanghai, China"
 
-resume_header_contact_info:     "Flat 6, Buccleuch Place, Edinburgh, UK, EH8 9NT <br> 
-                                zero-cooper@foxmail.com | +(44) 07492638362 "
+resume_header_contact_info:     "Room A308, Changyang Campus, 1687 Changyang Rd., Shanghai, China <br> 
+                                zero-cooper@foxmail.com | +(86) 17751034681 "
 display_header_contact_info:    "true"
 
-resume_header_intro: "<p>Informatics postgraduate student with solid mathematical background and rich project programming experience. Looking for an AI research job and further Ph.D study.
+resume_header_intro: "<p>Informatics postgraduated student with solid math background and rich project programming experience. Looking for an AI research job or further Ph.D study.
 <br> </p>
-<p>I am interested in the field of Game AI and more specificaly in but not limited to the following topics &#58 <br>
+<p>I am interested in solving control problems with RL, especially in the joint field with optimum control theory. The topics include but not limited to&#58 <br>
 <ul>
-  <li>Probabilistic Reinforcement Learning in Board Games.</li>
-  <li>Deep learning system explainablity & reliability.</li>
-  <li>Markov Decision Process (MDP) and policy-based model for multi-agent cooperation and competition.</li>
+  <li>Industrial control with reliable and interpretable RL</li>
+  <li>Game AI, probabilistic RL agents in Board Games</li>
+  <li>Multi-agent cooperation and competition in the view of game theory</li>
 </ul>  
 </p>"
 
@@ -44,11 +44,11 @@ resume_looking_for_work:        "yes"
 # comment out to hide
 # resume_section_interests:       true
 resume_section_education:       true
-resume_section_projects:        true
 resume_section_experience:      true
+resume_section_links:     true
+resume_section_projects:        true
 resume_section_skills:          true
 resume_section_recognition:     true
-# resume_section_links:           true
 # resume_section_associations:    true
 
 
