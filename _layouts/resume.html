@@ -78,26 +78,6 @@
       {% endif %}
 
 
-      {% if site.resume_section_projects %}
-      <!-- begin Projects -->
-      <section class="content-section">
-        <header class="section-header">
-          <h2>Projects</h2>
-        </header>
-
-        {% for project in site.data.projects %}
-        <div class="resume-item" itemscope itemtype="http://schema.org/CreativeWork">
-          <meta itemprop="creator" content="{{ site.resume_name }}" itemtype="http://schema.org/Person" />
-          <h3 class="resume-item-title" itemprop="name">{% if project.url %}<a href="{{ project.url }}" itemprop="url">{{ project.project }}</a>{% else %}{{ project.project }}{% endif %}</h3>
-          <h4 class="resume-item-details" itemprop="description">{{ project.role }}  &bull; {{ project.duration }}</h4>
-          <p class="resume-item-copy">{{ project.description }}</p>
-        </div>
-        {% endfor %}
-
-      </section>
-      <!-- end Projects -->
-      {% endif %}
-
 	  
 	  {% if site.resume_section_experience %}
       <!-- begin Experience -->
@@ -119,8 +99,50 @@
       <!-- end Experience -->
       {% endif %}
 
+      {% if site.resume_section_links %}
+      <!-- begin Links -->
+      <section class="content-section">
 
-      
+        <header class="section-header">
+          <h2>Publicaitons</h2>
+        </header>
+
+        <div class="resume-item">
+          <ul class="resume-item-list">
+            {% for link in site.data.links %}
+            <li><a href={{ link.url }} itemprop="url">{{ link.description }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </section>
+      <!-- end Links -->
+      {% endif %}
+     
+
+
+
+      {% if site.resume_section_projects %}
+      <!-- begin Projects -->
+      <section class="content-section">
+        <header class="section-header">
+          <h2>Projects</h2>
+        </header>
+
+        {% for project in site.data.projects %}
+        <div class="resume-item" itemscope itemtype="http://schema.org/CreativeWork">
+          <meta itemprop="creator" content="{{ site.resume_name }}" itemtype="http://schema.org/Person" />
+          <h3 class="resume-item-title" itemprop="name">{% if project.url %}<a href="{{ project.url }}" itemprop="url">{{ project.project }}</a>{% else %}{{ project.project }}{% endif %}</h3>
+          <h4 class="resume-item-details" itemprop="description">{{ project.role }}  &bull; {{ project.duration }}</h4>
+          <p class="resume-item-copy">{{ project.description }}</p>
+        </div>
+        {% endfor %}
+
+      </section>
+      <!-- end Projects -->
+      {% endif %}
+
+
       {% if site.resume_section_skills %}
       <!-- begin Skills -->
       <section class="content-section">
@@ -199,26 +221,6 @@
       <!-- end Interests -->
       {% endif %}
 
-      {% if site.resume_section_links %}
-      <!-- begin Links -->
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Additional Links</h2>
-        </header>
-
-        <div class="resume-item">
-          <ul class="resume-item-list">
-            {% for link in site.data.links %}
-            <li><a href={{ link.url }} itemprop="url">{{ link.description }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-
-      </section>
-      <!-- end Links -->
-      {% endif %}
-
       {% if site.resume_print_social_links %}
       <!-- begin Print Social Links -->
       <section class="content-section print-only">
@@ -236,8 +238,8 @@
       {% endif %}
 
       <footer class="page-footer">
-        <p class="footer-line">Made by <a href="https://www.facebook.com/ziyue.chu.1">@Ziyue Chu</a>. Fork me on <a href="https://github.com/zero-cooper">GitHub</a>.</p>
-        <p class="footer-line">Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://pages.github.com">github pages</a>. Updated&#58 Mon 23 Nov 2020. © Copyright 2020 Ziyue Chu.</p>
+        <p class="footer-line">Maintained by <a href="https://www.facebook.com/ziyue.chu.1">@Ziyue Chu</a>. Fork me on <a href="https://github.com/zero-cooper">GitHub</a>.</p>
+        <p class="footer-line">Powered by <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://pages.github.com">github pages</a>. Updated&#58 Thu 12 Jan 2023. © Copyright 2023 Ziyue Chu.</p>
       </footer>
 
     </div>
