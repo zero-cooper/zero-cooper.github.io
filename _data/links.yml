@@ -1,5 +1,9 @@
-# links
-- url: "#"
-  description: Springfield Jazz Enthusiasts
-- url: "#"
-  description: Springfield Young Professionals
+# publications
+- url: "https://iopscience.iop.org/article/10.1088/1748-3190/aca308/meta"
+  description: <b>&#91;J&#93; The perceived effects of augmented trail sensing and mood recognition abilities in a human–fish biohybrid system</b>
+- url: "https://ieeexplore.ieee.org/abstract/document/9904224"
+  description: <b>&#91;C&#93; A Hierarchical Bayes-Based Evolutionary Ensemble Classification Algorithm</b>
+- url: "http://static.tianyancha.com/patent/contentPDF/cb2d8c810400a782360a784c3d1ba389.pdf"
+  description: <b>&#91;P&#93; A Transformer of Attractor Neural Network based on Neuron Structure in Digital Spiking Neural Network</b>, CN114065912A
+- url: ""
+  description: <b> &#91;C&#93; An Empirical Model of Goldfish Fleeing Strategy</b> (to be published) 
