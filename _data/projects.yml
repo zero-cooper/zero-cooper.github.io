@@ -5,10 +5,10 @@
   role: Team research project
   duration: 2021.06 &mdash; 2022.06 <b>[Robotics & SNN & GA & Biology]</b>
   url: "https://mp.weixin.qq.com/s/iK3g4JmK7e0TwlXtmUuuBQ"
-  description: <ul><li>A fish school interaction environment is simulated and demonstrated in WAIC 2021;</li><li>Virtural robot fish are trained with SNN to live with the fish school and guide its movement with human interaction;</li><li>SNN training structure is optimized by GA to reduce links with low spiking frequency from a fully connected graph.</li></ul>
+  description: <ul><li>A fish school interaction environment is simulated and demonstrated in WAIC 2021;</li><li>Virtual robot fish are trained with SNN to live with the fish school and guide its movement with human interaction;</li><li>SNN training structure is optimized by GA to reduce links with low spiking frequency from a fully connected graph.</li></ul>
 
 - project: Data Mining and Analysis for MSD Sales 
-  role: Comercial project
+  role: Commercial project
   duration: 2021.01 &mdash; 2021.06 <b>[Data Mining]</b>
   description: <ul><li>Annual sales data analysis and anomaly cheat sales sorting for MSD, an international medical company;</li><li>A random forest tree is applied to filter out normal sales records and 2nd distributors;</li><li>A statistical anomaly reasoning module is provided. </li></ul>
 
@@ -16,7 +16,7 @@
   role: Self project
   duration: 2020.09 &mdash; 2020.12 <b>[Game AI & Reinforcement Learning]</b>
   # url: "#"
-  description: <ul><li>A DQN model was implemented in SpaceInvader Atari Game Environment;</li><li>TD error was estimated to optimize the 3-layer convolutional DQN in Pytorch;</li><li>An experience replay memory class was implemented to exploit past experience and reduce correlation;</li><li>Implimentation of two Game Environments with Pygame&#58; A car crash avoiding game & DaVince Code, a popular board game.</li></ul>
+  description: <ul><li>A DQN model was implemented in SpaceInvader Atari Game Environment;</li><li>TD error was estimated to optimize the 3-layer convolutional DQN in Pytorch;</li><li>An experience replay memory class was implemented to exploit past experience and reduce correlation;</li><li>Implementation of two Game Environments with Pygame&#58; A car crash avoiding game & DaVince Coda, a popular board game.</li></ul>
  
 - project: Data Mining for Energy Usage in Informatics Forum
   role: Group project
@@ -33,5 +33,5 @@
 - project: Intelligent Remote-controlled Figure-traceable Camera on Raspberry PI
   role: Group project
   duration: 2017.11 &mdash; 2018.01 <b>[Deep Learning & Automatic control]</b>
-  description: <ul><li>Intelligent home system design&#58 Capture visitor's face, transmit to house-owner's mobile terminal and trace the visitor;</li><li>A new algorithm transferring RGB image space to YCrCb sapce was implemented to increase the face recognition rate under extreme environment;</li><li>Supervised by Prof. Shengshou Zhao.</li></ul>
+  description: <ul><li>Intelligent home system design&#58 Capture visitor's face, transmit to house-owner's mobile terminal and trace the visitor;</li><li>A new algorithm transferring RGB image space to YCrCb space was implemented to increase the face recognition rate under extreme environment;</li><li>Supervised by Prof. Shengshou Zhao.</li></ul>
   
