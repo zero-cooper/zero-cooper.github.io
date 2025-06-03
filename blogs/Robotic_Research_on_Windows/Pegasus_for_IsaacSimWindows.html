@@ -1,0 +1,864 @@
+---
+layout: default
+title: [Blog] Robotic Research on Windows — Adapting Pegasus with IsaacSim Windows
+permalink: /blogs/Pegasus_for_IsaacSimWindows.html
+---
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[Blog] Robotic Research on Windows — Adapting Pegasus with IsaacSim Windows </title>
+
+//<base href="/blogs/Robotic_Research_on_Windows/">
+
+<style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1e65a371-16a0-80b6-a7b3-d335e45daf8f" class="page sans"><header><h1 class="page-title">[Blog] Robotic Research on Windows — Adapting Pegasus with IsaacSim Windows </h1><p class="page-description"></p></header><div class="page-body"><h2 id="1e65a371-16a0-805d-9ad2-ef343a9a1425" class="">Section 1. Forehead:</h2><h3 id="1e65a371-16a0-808a-8cc4-c0cbc7449a7e" class="">PX4 (drones simulator) brief working principles (<a href="https://docs.px4.io/main/en/simulation/#simulation">ref</a>):</h3><p id="1e95a371-16a0-809c-890e-ca676fa99e4c" class="">
+</p><p id="1e75a371-16a0-802a-ad96-e0eca17faba2" class="">PX4 is a popular drones simulator that supports both Software In The Loop (SITL) simulation and Hardware In The Loop (HITL) simulation. In this passage, we only focus on SITL simulation and its adaptation on Windows platform. </p><p id="1e85a371-16a0-80fd-a810-f7a32c2a82a0" class="">
+</p><p id="1e75a371-16a0-80ca-b62e-e40aacc39a35" class="">A SITL build of PX4 uses <strong><a href="https://github.com/PX4/PX4-Autopilot/blob/main/src/modules/simulation/simulator_mavlink/SimulatorMavlink.cpp">SimulatorMavlink.cpp</a></strong> to handle these messages while a hardware build in HIL mode uses <strong><a href="https://github.com/PX4/PX4-Autopilot/blob/main/src/modules/mavlink/mavlink_receiver.cpp">mavlink_receiver.cpp</a></strong>. The communication with PX4 are via the simulator MAVlink Api:</p><figure id="1e85a371-16a0-8028-8316-e98ff93da695" class="image"><a href="px4_simulator_messages.Dx6umqAP.svg"><img style="width:603px" src="px4_simulator_messages.Dx6umqAP.svg"/></a></figure><p id="1e85a371-16a0-8017-b508-c22a6e0c0130" class=""><a href="https://docs.px4.io/main/en/simulation/#simulator-mavlink-api">https://docs.px4.io/main/en/simulation/#simulator-mavlink-api</a></p><p id="1e85a371-16a0-803e-ab49-d337014343bf" class="">
+</p><p id="1e85a371-16a0-80d1-b05b-cc28dd285a46" class="">The MAVlink connections are built with UDP/TCP ports. The default connections are: </p><figure id="1e85a371-16a0-80c0-a4f0-f3f7cf7bff9b" class="image"><a href="px4_sitl_overview.CtoNVhd6.svg"><img style="width:602.984375px" src="px4_sitl_overview.CtoNVhd6.svg"/></a></figure><p id="1e85a371-16a0-8014-98a0-d14d170106d1" class=""><a href="https://docs.px4.io/main/en/simulation/#sitl-simulation-environment">https://docs.px4.io/main/en/simulation/#sitl-simulation-environment</a></p><p id="1e85a371-16a0-800d-854a-f1644af97a67" class="">It’s worth to mention here, PX4 uses TCP port 4560 to connect with our customized simulator (i.e. Isaac Sim in this passage, instead of traditional ROS2) to send simulated physical data.</p><p id="1e75a371-16a0-8048-ae2c-da36d724c7c2" class="">
+</p><p id="1e75a371-16a0-8083-8447-e7ba294af050" class="">The QGroundControl (QGC) app is used as the controller of outside commanders and passing to PX4, displaying in the simulator ROS2 or IsaacSim. QGC can also be controlled by outside developer-side controller, i.e. Joystick/Gamepad. Settings can be found in <a href="https://docs.px4.io/main/en/config/joystick.html">https://docs.px4.io/main/en/config/joystick.html</a>. </p><p id="1e85a371-16a0-8060-9132-ef03c37b796d" class="">
+</p><p id="1e85a371-16a0-80c5-8d6e-ca96864c96a2" class="">The ports for the GCS, offboard APIs (set-up by script <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.sihsim">px4-rc.sihsim</a></code>, called by conditions in <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.simulator">px4-rc.simulator</a></code>) and simulator are specified by startup scripts in <code>ROMFS/px4fmu_common/init.d-posix/rcS</code> . ‘rcS’ is the main start-up script to be called by the outside simulator, and ‘px4-rc.simulator’ is called inside ‘rcS’ to setup basic simulator connections. The connections are built with MAVlink api from script <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink">px4-rc.mavlink</a></code> (common upd connections to pass data, e.g. GCS) and <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlinksim">px4-rc.mavlinksim</a></code> (common tcp connections to pass data between the simulator). <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.gzsim">px4-rc.gzsim</a></code> and <code><a href="https://github.com/PX4/PX4-Autopilot/blob/main/ROMFS/px4fmu_common/init.d-posix/px4-rc.jmavsim">px4-rc.jmavsim</a></code> are 2 quick start api script to start a gazebo and JVM simulator.</p><p id="1e85a371-16a0-801f-ab2a-c432e507aa68" class="">
+</p><p id="1e85a371-16a0-8042-a173-e0e24088d01a" class=""> See <strong><a href="https://docs.px4.io/main/en/concept/system_startup.html">System Startup</a></strong> to learn more.<br/><br/></p><p id="1e95a371-16a0-80be-afb3-dae5a6580aff" class="">
+</p><h3 id="1e95a371-16a0-8006-b94d-cc52f2d423a8" class="">Pegasus basic working principles (<a href="https://pegasussimulator.github.io/PegasusSimulator/">ref</a>): </h3><p id="1e95a371-16a0-8092-b26b-c93a8b50759f" class="">Pegasus is a popular physical simulator extension on IsaacSim simulator PX4 drones simulator core.  It builds a UI interface in IsaacSim for user defining variables, building up models and scripts. The defined variables in the UI interface is passed via connections built up by Pegasus to PX4 core, and the drone simulator in IsaacSim is controlled by the PX4 commands. </p><p id="1e95a371-16a0-803e-8263-e273f89d1025" class="">
+</p><p id="1e95a371-16a0-802a-8969-d533a66c1c22" class="">The relation of PX4, simulator (i.e. IsaacSim), Pegasus is shown in the following <a href="https://arxiv.org/pdf/2307.05263">Figure</a>:</p><figure id="1e95a371-16a0-8047-8e61-d8f9c30c4795" class="image"><a href="image.png"><img style="width:602.984375px" src="image.png"/></a></figure><p id="1e95a371-16a0-8050-942c-e38c432ab368" class="">
+</p><p id="1e65a371-16a0-80fb-84fd-cc0813556d3d" class="">Previously, Pegasus has been<a href="https://pegasussimulator.github.io/PegasusSimulator/source/setup/installation.html"> tested </a>with Isaac Sim 4.2.0 on the Ubuntu 22.04LTS with NVIDIA driver 550.90.07, and the PX4-Autopilot used during development was v.14.3. Most robotics simulator developments are build on Linux, which impeded researcher using Windows system due to incompatibility. In this article, we have successfully modified and tested Pegasus extension working on IsaacSim windows system. Below is a list of tested hardware configuration info:<div class="indented"><ul id="1e95a371-16a0-802a-af85-e1457132209c" class="bulleted-list"><li style="list-style-type:disc">OS version: Microsoft Windows 11 Home</li></ul><ul id="1ea5a371-16a0-805d-ba49-daae7ec8576e" class="bulleted-list"><li style="list-style-type:disc">WSL2: Ubuntu 22.04 LTS</li></ul><ul id="1e95a371-16a0-8015-a65f-f6e5ea78ffac" class="bulleted-list"><li style="list-style-type:disc">IsaacSim version: 4.2.0 Windows</li></ul><ul id="1e95a371-16a0-80df-8e90-d144975ad9fa" class="bulleted-list"><li style="list-style-type:disc">GPU verion: Nvidia GeForce RTX 4090 Laptop; Driver Version: 566.07; CUDA Version: 12.7</li></ul><ul id="1e95a371-16a0-8060-8e3b-dee7c4e5f907" class="bulleted-list"><li style="list-style-type:disc">PX4 version: latest v1.16.0-beta1-115-g9eaec534ab (should also work in stable v1.15 version)</li></ul><ul id="1e95a371-16a0-8082-99f4-c72779b64439" class="bulleted-list"><li style="list-style-type:disc">Pegasus version: <a href="https://github.com/PegasusSimulator/PegasusSimulator">v4.2.0</a> </li></ul><ul id="1e95a371-16a0-80d8-bc93-ea5f29090cc2" class="bulleted-list"><li style="list-style-type:disc">Tested time: 28/04/2025</li></ul></div></p><p id="1e65a371-16a0-8056-a113-cf01e7fdcef9" class="">
+</p><h2 id="1e65a371-16a0-804a-8b15-f2429685995f" class="">Section 2: Tried Methods</h2><p id="1e95a371-16a0-8001-9eaf-f088e2865098" class="">PX4 is originally working in Ubuntu system, we initially wish to find a directly windows support PX4 version. <a href="https://docs.px4.io/main/en/dev_setup/dev_env_windows_cygwin.html">Page</a> provided a Cygwin-based<strong> </strong>toolchain MSI installer. This method is tested failure to build on my tested PC, and this method is aborted officially after PX4 v1.10.</p><p id="1e95a371-16a0-808b-8657-f6753b23d46f" class="">
+</p><p id="1e95a371-16a0-803a-b630-df906f38a8d3" class="">Now, <a href="https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html">wsl2-based development environment</a> is the officially recommended way to run latest PX4 versions on windows system. How to install wsl2 Ubuntu system on windows can refer to other passages (there are many tutorials on installing wsl2 Ubuntu on windows). Therefore, we have to run latest px4 simulator in wsl2 on windows system, and build the bridge between local IsaacSim physical simulator with wsl2 PX4 host via modified ’Pegasus extension‘. </p><p id="1e65a371-16a0-80d8-8887-da0e037e4aae" class="">
+</p><h2 id="1e65a371-16a0-8027-90fd-dbedfa6baaf8" class="">Section 3: Technical Steps</h2><h3 id="1e95a371-16a0-801a-afe2-e7b408d7295b" class="">Pre-request and IsaacSim 4.2.0 Windows Installation:</h3><p id="1e95a371-16a0-80aa-ba9b-f7e8afb63955" class="">An installed Ubuntu wsl2 system on Windows. In this article, we have installed Ubuntu 22.04 LTS in wsl2. IsaacSim <strong>4.2.0</strong> windows version (7.8GB) installed locally on windows with direct setup package in <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/download.html#download-archive">page</a>. Use Isaac Sim Compatibility Checker V4.5.0 in <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/download.html#latest-release">page</a> to check and ensure system compatibility.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1e95a371-16a0-805e-9121-ed4feca36106" class="code"><code class="language-Markdown">**NOTICE:** 
+
+IsaacSim requires basic hardware requirement, see page for details.
+	- Older version Ubuntu before 18.04 (inc.) is not supported;
+	- At least 50 GB SSD;
+	- GPU version above GeForce RTX 3070;
+	- GPU driver lowest version: 537.58 (GameReady, Studio), 537.70 (RTX/Quadro, Grid/vGPU)
+	- Above are the specially listed minimal hardware requirement, don&#x27;t install below these requirements.
+
+IsaacSim 4.2.0 is an older version, and older version installation is not officially supported with Omniverse Launcher. Instead, install with above setup package is recommended. </code></pre><p id="1ea5a371-16a0-80a6-ae2f-d0ee0081f2ba" class="">
+</p><p id="1e95a371-16a0-80bc-9f9b-f6940b8d8fd7" class="">The following IsaacSim 4.2.0 workstation installation can follow <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/install_workstation.html#workstation-installation">page</a> (installation for 4.5 version) similarly. Start IsaacSim with Isaac Sim App Selector, where the fields <code>ROS Bridge Extension</code> and <code>Use Internal ROS2 Library</code> will be left for further completion. </p><p id="1e95a371-16a0-807c-bd02-db37414b8168" class="">
+</p><h3 id="1e95a371-16a0-808d-86ed-db77c2df905b" class="">Installing Pegasus extension:</h3><p id="1ea5a371-16a0-80d1-8ed2-f24ea019ec87" class="">Follow steps from <a href="https://pegasussimulator.github.io/PegasusSimulator/source/setup/installation.html#configuring-the-environment-variables">page</a> to install Pegasus extension. Notice the installation tutorial is for linux, modify when necessary. Below is a list of modifications:</p><p id="1ea5a371-16a0-8089-a6af-e1424f8d3eb7" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ea5a371-16a0-8046-859e-c79eae145d75" class="code"><code class="language-Markdown">Configuring system environment variables in windows (can be mannually done in GUI):
+- Add ISAACSIM_PATH the &#x27;IsaacSim 4.2.0&#x27; working folder directory to system variable;
+- Find and add ISAACSIM_PYTHON, ISAACSIM the directories of &#x27;python.bat&#x27; and &#x27;isaac-sim.bat&#x27; under IsaacSim 4.2.0 folder;
+
+Check:
+The following 2 commands should be running in any cmd (change the 2nd path to corresponding ones add_cubes.py directory):
+
+# Run the bundled python interpreter and see if it prints on the terminal &quot;Hello World.&quot;
+ISAACSIM_PYTHON -c &quot;print(&#x27;Hello World.&#x27;)&quot;
+
+# Run the python interpreter and check if we can run a script that starts the simulator and adds cubes to the world
+ISAACSIM_PYTHON ${ISAACSIM_PATH}/standalone_examples/api/omni.isaac.core/add_cubes.py</code></pre><p id="1ea5a371-16a0-8082-9713-f4390b11d7b1" class="">
+</p><p id="1ea5a371-16a0-80f4-8e66-e14837fa9c18" class="">When installing Pegasus extension, Step 4, notice that the <code>extension</code> directory should be the pegasus extension path in your windows. After enabling the Pegasus simulator extension, in your IsaacSim third-party tab, you should expect no <mark class="highlight-red">errors</mark><mark class="highlight-pink"> </mark><mark class="highlight-default">in IsaacSim commander.</mark></p><p id="1ea5a371-16a0-80b6-ae30-e52a94702e10" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ea5a371-16a0-80a6-94af-c99b0fb8a4b3" class="code"><code class="language-Markdown">Notice:
+Although it is common to meet some warnings in the IsaacSim commander, you should always try to resolve errors.
+Do not totally ignore warnings, as some warnings may indicate future errors and improper running. </code></pre><p id="1ea5a371-16a0-802e-a3db-e50c65f1efbb" class="">
+</p><p id="1ea5a371-16a0-8057-9821-efef405f3582" class="">Stop the installing process until <a href="https://pegasussimulator.github.io/PegasusSimulator/source/setup/installation.html#installing-px4-autopilot">Section Installing PX4-Autopilot</a>, install PX4 following next section.</p><p id="1ea5a371-16a0-80a4-83d3-f88d5bdeadc2" class="">
+</p><h3 id="1e65a371-16a0-8006-94ba-c3f6ab715106" class="">Installing PX4 and QGC:</h3><p id="1ea5a371-16a0-80e1-8444-e21998644999" class="">Install latest/stable PX4 version and QGC on WSL2 ubuntu 22.04 LTS system following <a href="https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html">page</a>. </p><p id="1ea5a371-16a0-807f-a797-c4f469512884" class="">
+</p><p id="1ea5a371-16a0-8074-933a-f88ed7f6c659" class="">Notice that in step installing ‘<strong>QGroundControl in WSL</strong>’, due to lack of GUI operation on Ubuntu system and wget tool, you can also download the QGroundControl.AppImage from the provided link in windows, and in windows explorer (side bar linux, or type in the wsl address) drag the downloaded app file from windows local to wsl under ‘~’ directory.</p><p id="1ea5a371-16a0-8074-822a-c8cbeb0f13ea" class="">
+</p><p id="1ea5a371-16a0-80cd-a2c0-c08c8c195a76" class="">You can also install the QGC on windows locally and configure the communication between wsl and windows local following <a href="https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html#qgroundcontrol-on-windows">page</a>.</p><p id="1ea5a371-16a0-8055-8836-f7d3aaf4d946" class="">
+</p><p id="1ea5a371-16a0-80cc-93f3-edbf779d0b8d" class="">By now, after installing both QGC on windows and PX4 on WSL, you should be able to run PX4 on wsl with QGC control on windows totally. To test, start and test the following SITL simulation commands:</p><p id="1ea5a371-16a0-8089-b2c7-d22ba4f84e53" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ea5a371-16a0-8077-a993-cacd524a7f5e" class="code"><code class="language-Markdown"># Start Gazebo with the x500 multicopter
+make px4_sitl gz_x500
+
+# Start Gazebo Classic with plane
+make px4_sitl gazebo-classic_plane
+
+# Start Gazebo Classic with iris and optical flow
+make px4_sitl gazebo-classic_iris_opt_flow
+
+# Start JMavSim with iris (default vehicle model)
+make px4_sitl jmavsim
+
+# Start PX4 with no simulator (i.e. to use your own &quot;custom&quot; simulator)
+make px4_sitl none_iris</code></pre><p id="1ea5a371-16a0-80ee-9c41-c593f4e2d36e" class="">
+</p><p id="1ea5a371-16a0-804a-9f1a-c8f958235539" class="">You should be able to control in either pxh command lines with commanders such as </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1ea5a371-16a0-8048-bb2e-c9363457497c" class="code"><code class="language-Markdown">pxh&gt; commander takeoff</code></pre><p id="1ea5a371-16a0-8071-afac-ec2aac459955" class="">or direct in QGC UI following <a href="https://docs.px4.io/main/en/dev_setup/building_px4.html#building-px4-software">page</a>. </p><p id="1ea5a371-16a0-80d3-8def-fe9957c9f5ba" class="">
+</p><p id="1ea5a371-16a0-8047-900f-c5f687c97dfe" class="">Notice, you are expected to fail to build with command ‘make px4_sitl jmavsim’. This is because of missing dependencies in your Ubuntu system. Follow <a href="https://www.youtube.com/watch?v=sZbJOSk8Cc4&amp;list=WL&amp;index=1&amp;t=1429s">youtube video</a> to install all necessary dependencies: </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-800e-93d4-f94a10642639" class="code"><code class="language-Markdown">cd PX4-Autopilot/
+sudo apt install ant
+# note this package is different from the video
+sudo apt-get install openjdk-11-jdk 
+# optional step to select the java version if you have multiple installed
+sudo update-alternatives --config java  
+
+make distclean
+make clean
+
+make px4_sitl jmavsim
+
+# if you still encounter errors (i.e. you can not run &#x27;make px4_sitl gz_x500&#x27; after these installations), try delete and re-install the PX4 repo again</code></pre><p id="1ea5a371-16a0-80b9-ad35-ee9d7ff90754" class="">
+</p><h3 id="1e65a371-16a0-8054-9b02-fb0f2d3bd659" class="">Modifications:</h3><p id="1ea5a371-16a0-8033-a5ef-dfb1c97fa5c2" class="">Now remains the link between IsaacSim Windows and PX4 on wsl with Pegasus. The main conflict of Pegasus is the its linux-styled path and commands applied in windows. Besides, this section also set-up the communication link between wsl and windows local.</p><p id="1eb5a371-16a0-80ea-bd9e-fb5c34e15318" class="">
+</p><ol type="1" id="1eb5a371-16a0-80ff-98e4-fba5ac614705" class="numbered-list" start="1"><li>Locate ‘px4_launch_tool.py’ File in windows directory ‘.\PegasusSimulator-main\extensions\pegasus.simulator\pegasus\simulator\logic\backends\tools\px4_launch_tool.py’ of Pegasus extension. Running this script is equivalent of the start simulating button in the IsaacSim UI interface. <ol type="a" id="1eb5a371-16a0-8009-b7d2-e5f1e0892ce5" class="numbered-list" start="1"><li>Add ‘import platform, re’ in the imports area, pip install these modules if you don’t have;</li></ol><ol type="a" id="1eb5a371-16a0-8054-ab19-d429164215c9" class="numbered-list" start="2"><li>In <code>class PX4LaunchTool</code>, function <code>def launch_px4(self)</code>, Rewrite:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-8032-8277-fe3b4c0a6d19" class="code"><code class="language-Python">def launch_px4(self):
+    &quot;&quot;&quot;
+    Method that will launch a px4 instance with the specified configuration
+    &quot;&quot;&quot;
+    if platform.system() == &quot;Windows&quot;:
+    # find the wsl address from the windows local side
+	   wsl_addr = &#x27;172.26.64.1&#x27; # use ipconfig command in your CMD to get your own wsl ip address
+
+        wsl_cmd = (
+            f&quot;export PX4_SIM_HOST_ADDR=&#x27;{wsl_addr}&#x27; &amp;&amp; &quot;
+            f&quot;export PX4_SIM_MODEL=&#x27;{self.px4_model}&#x27; &amp;&amp; &quot;
+            f&quot;cd {self.px4_dir} &amp;&amp; &quot;
+            f&quot;./build/px4_sitl_default/bin/px4 &quot;
+            f&quot;ROMFS/px4fmu_common/ -s {self.rc_script} &quot;
+            f&quot;-i {self.vehicle_id} -d&quot;
+        )
+        self.px4_process = subprocess.Popen(
+            [&quot;wsl&quot;, &quot;bash&quot;, &quot;-lc&quot;, wsl_cmd],
+            shell=False,
+            env=self.environment,
+        )
+    else:
+        self.px4_process = subprocess.Popen(
+            [
+                self.px4_dir + &quot;/build/px4_sitl_default/bin/px4&quot;,
+                self.px4_dir + &quot;/ROMFS/px4fmu_common/&quot;,
+                &quot;-s&quot;,
+                self.rc_script,
+                &quot;-i&quot;,
+                str(self.vehicle_id),
+                &quot;-d&quot;,
+            ],
+            cwd=self.root_fs.name,
+            shell=False,
+            env=self.environment,
+        )</code></pre></li></ol></li></ol><ol type="1" id="1ea5a371-16a0-80f2-a34c-c7eb86968e86" class="numbered-list" start="2"><li>Locate ‘configs.yaml’ file under dir ‘.\PegasusSimulator main\extensions\pegasus.simulator\config\configs.yaml’. <ol type="a" id="1eb5a371-16a0-8062-9f63-fcecbad91439" class="numbered-list" start="1"><li>Always keep the px4_dir your default/installed ubuntu path (not your wsl path from windows), e.g. in my project it is ‘<code>~/PX4-Autopilot</code>’;</li></ol><ol type="a" id="1eb5a371-16a0-8088-9c35-f2b1865c345b" class="numbered-list" start="2"><li>You can change the latitude and longitude here to your preferred location;</li></ol></li></ol><ol type="1" id="1eb5a371-16a0-8050-9c3e-c00970be2eb8" class="numbered-list" start="3"><li>Locate ‘pegasus_interface.py’ file under dir ‘.\PegasusSimulator-main\extensions\pegasus.simulator\pegasus\simulator\logic\interface\pegasus_interface.py’.<ol type="a" id="1eb5a371-16a0-80fc-966f-f9bf01f53d41" class="numbered-list" start="1"><li>add ‘import platform’ in the imports</li></ol><ol type="a" id="1eb5a371-16a0-806e-a2b2-dcd2ddb20fcc" class="numbered-list" start="2"><li>Replace function <code>def _get_px4_path_from_config(self)</code> under <code>class PegasusInterface</code><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-807e-86e5-e69fa1950800" class="code"><code class="language-Python">def _get_px4_path_from_config(self):
+    &quot;&quot;&quot;
+    Method that reads the configured PX4 installation directory from the extension configuration file 
+
+    Returns:
+        str: A string with the path to the px4 configuration directory or empty string &#x27;&#x27;
+    &quot;&quot;&quot;
+
+    px4_dir = &quot;&quot;
+    
+    # Open the configuration file. If it fails, just return the empty path
+    try:
+        with open(CONFIG_FILE, &#x27;r&#x27;) as f:
+            data = yaml.safe_load(f)
+        if platform.system() == &quot;Windows&quot;:
+            px4_dir = data.get(&quot;px4_dir&quot;, &#x27;~/PX4-Autopilot&#x27;)
+        else:
+            px4_dir = os.path.expanduser(data.get(&quot;px4_dir&quot;, None))
+    except:
+        carb.log_warn(&quot;Could not retrieve px4_dir from: &quot; + str(CONFIG_FILE))
+
+    return px4_dir</code></pre></li></ol><ol type="a" id="1ea5a371-16a0-808b-bc36-d3aea425faa6" class="numbered-list" start="3"><li>Replace function <code>set_px4_path(self, path: str)</code> under <code>class PegasusInterface</code><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-805f-acfd-f7d57531dee3" class="code"><code class="language-Python">def set_px4_path(self, path: str):
+    &quot;&quot;&quot;Method that allows a user to save a new px4 directory in the configuration files of the extension.
+
+    Args:
+        absolute_path (str): The new path of the px4-autopilot installation directory
+    &quot;&quot;&quot;
+    if platform.system() == &quot;Windows&quot;:
+        self._px4_path = path
+    else:
+        # Save the new path for current use during this simulation
+        self._px4_path = os.path.expanduser(path)
+
+        # Save the new path in the configurations file for the next simulations
+        try:
+
+            # Open the configuration file and the all the configurations that it contains
+            with open(CONFIG_FILE, &#x27;r&#x27;) as f:
+                data = yaml.safe_load(f)
+
+            # Open the configuration file. If it fails, just warn in the console
+            with open(CONFIG_FILE, &#x27;w&#x27;) as f:
+                data[&quot;px4_dir&quot;] = path
+                yaml.dump(data, f)
+        except:
+            carb.log_warn(&quot;Could not save px4_dir to: &quot; + str(CONFIG_FILE))
+
+  carb.log_warn(&quot;New px4_dir set to: &quot; + str(self._px4_path))</code></pre></li></ol></li></ol><ol type="1" id="1eb5a371-16a0-808a-ade3-e67d45e4b76b" class="numbered-list" start="4"><li>Locate ‘ui_delegate.py’ file under dir ‘.\PegasusSimulator-main\extensions\pegasus.simulator\pegasus\simulator\ui\ui_delegate.py’.<ol type="a" id="1eb5a371-16a0-8012-94b3-fb406df44cdf" class="numbered-list" start="1"><li>add ‘import platform’ in the imports</li></ol><ol type="a" id="1eb5a371-16a0-803e-91d3-e277c6444439" class="numbered-list" start="2"><li>Replace var definition ‘<code>px4_path = os.path.expanduser(self._px4_directory_field.get_value_as_string())</code>’ in function <code>async def async_load_vehicle()</code>(~line 236) of <code>class UIDelegate</code> with <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-80a2-b82a-d1fd49e5e46c" class="code"><code class="language-Python"># Read the PX4 path from the field
+if platform.system() == &quot;Windows&quot;:
+    px4_path = self._px4_directory_field.get_value_as_string()
+else:
+    px4_path = os.path.expanduser(self._px4_directory_field.get_value_as_string())</code></pre></li></ol></li></ol><ol type="1" id="1eb5a371-16a0-802c-87bd-ebab9c9689e2" class="numbered-list" start="5"><li>Locate ‘px4_mavlink_backend.py’ file under dir ‘.\PegasusSimulator-main\extensions\pegasus.simulator\pegasus\simulator\logic\backends\px4_mavlink_backend.py’. <ol type="a" id="1eb5a371-16a0-80af-91cb-f1dd8ffeead2" class="numbered-list" start="1"><li>add ‘import platform, re, subprocess’ in the imports</li></ol><ol type="a" id="1eb5a371-16a0-808f-8d4b-e0f43d874ffd" class="numbered-list" start="2"><li>Under <code>class PX4MavlinkBackendConfig(BackendConfig)</code>, function <code>def __init__(self, config={})</code>, after define self.config = config, add<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1eb5a371-16a0-80b2-8347-cb356a28474c" class="code"><code class="language-Python">if platform.system() == &#x27;Windows&#x27;:
+    # find the wsl address from the windows local side
+	   wsl_addr = &#x27;172.26.64.1&#x27; # use ipconfig command in your CMD to get your own wsl ip address
+    
+    self.config[&#x27;connection_ip&#x27;] = wsl_addr</code></pre></li></ol></li></ol><hr id="1ec5a371-16a0-801c-83a8-daf0383d8b40"/><p id="1ec5a371-16a0-80ae-80b7-c8120be4f587" class="">All modifications ends here, you should be able to run with out errors in IsaacSim.</p><p id="1ec5a371-16a0-80d3-95ba-cdcfda95f1f4" class="">
+</p><ol type="1" id="1eb5a371-16a0-80e4-9f90-fb58b8184692" class="numbered-list" start="6"><li>Under wsl Ubuntu dir ‘.\PX4-Autopilot\ROMFS\px4fmu_common\init.d-posix’</li></ol><ul id="1eb5a371-16a0-8028-aca4-d7e3a612fc74" class="bulleted-list"><li style="list-style-type:disc">rcS - quick start file, called by Pegasus in ‘px4_launch_tool.py’; call ‘px4-rc.simulator’</li></ul><ul id="1ec5a371-16a0-80b1-9db2-d9fc210f16ca" class="bulleted-list"><li style="list-style-type:disc">‘px4-rc.simulator’ should call ‘. px4-rc.mavlinksim’ to connect with customized physical simulator, i.e. IsaacSim</li></ul><ul id="1ec5a371-16a0-80f9-aa0e-cdbe20fea2eb" class="bulleted-list"><li style="list-style-type:disc">In ‘. px4-rc.mavlinksim’, ‘PX4_SIM_HOST_ADDR’ has already been set as the system variable in wsl in Pegasus ‘px4_launch_tool.py’, while ‘PX4_SIM_HOSTNAME’ is None;</li></ul><p id="1ed5a371-16a0-80e2-945c-d8c8ff29522f" class="">
+</p><h2 id="1ed5a371-16a0-80a1-9c96-dade8036860a" class="">Section 4 Start IsaacSim:</h2><ol type="1" id="1ed5a371-16a0-8032-8632-c194bf2d03e4" class="numbered-list" start="1"><li>Open your QGC on windows;</li></ol><ol type="1" id="1ed5a371-16a0-807c-8437-c6a7327bd4d4" class="numbered-list" start="2"><li>In windows system, go to IsaacSim installation dir, run command line CMD or PowerShell there. Better to use there selector to start:<ol type="a" id="1ed5a371-16a0-8054-97f7-c687d86262eb" class="numbered-list" start="1"><li>RUN: .\isaac-sim.selector.bat</li></ol></li></ol><ol type="1" id="1ed5a371-16a0-808e-9730-e09c22329af3" class="numbered-list" start="3"><li>You should see the start of IsaacSim App selector 4.2.0:<figure id="1ed5a371-16a0-80f9-b18f-ec432ded3c2d" class="image"><a href="1746739875969.png"><img style="width:681.984375px" src="1746739875969.png"/></a></figure><p id="1ed5a371-16a0-80b7-89d8-c77e3c4799a1" class="">[Notice] the above highlight parts, should be configured correctly as the above steps, and will show the info;</p></li></ol><ol type="1" id="1ed5a371-16a0-80d8-aaa2-da078939ccb5" class="numbered-list" start="4"><li>Loading scene and vehicle, you should be able to see everything working:<ol type="a" id="1ed5a371-16a0-808f-b647-c035db054940" class="numbered-list" start="1"><li>First run command in pxh&gt; commander takeoff / or press takeoff button on QGC</li></ol><figure id="1ed5a371-16a0-8092-807a-daf8e45a91ae" class="image"><a href="1746741192006.png"><img style="width:681.984375px" src="1746741192006.png"/></a></figure><p id="1ed5a371-16a0-8089-9ca6-cf5e2b1f06ec" class="">b. set your path or route via commands or QGC control:</p><figure id="1ed5a371-16a0-8060-8046-e91857fca123" class="image"><a href="1746741431727.png"><img style="width:2556px" src="1746741431727.png"/></a></figure></li></ol><p id="1ed5a371-16a0-80fa-90d2-c5a26cb7d198" class="">
+</p><p id="1ed5a371-16a0-8023-87e3-cdc42e1dca41" class="">
+</p><h2 id="1e65a371-16a0-800c-801f-d263e19cb2f8" class="">Section 5: Quick Troubleshooting:</h2><p id="1ed5a371-16a0-8069-8df9-e84dc24f1863" class="">
+</p><ol type="1" id="1e65a371-16a0-808d-b5f2-fd36d3c4b539" class="numbered-list" start="1"><li>Warning: waiting for the first heartbeat;</li></ol><p id="1eb5a371-16a0-805d-80ee-e3f17a642e73" class="">The communication between pegasus and px4 wsl is not correctly configured.</p><p id="1eb5a371-16a0-806f-93e0-e9cea7e05b02" class="">
+</p><ol type="1" id="1eb5a371-16a0-8040-8d2a-f0d4c0232892" class="numbered-list" start="2"><li>Error:  xxx is not a valid Win32 api;</li></ol><p id="1eb5a371-16a0-80a5-b79f-de0153e98246" class="">linux command not supported in windows, need to do the same thing with replaced windows commands;</p><p id="1eb5a371-16a0-806e-a760-f1c479230625" class="">
+</p><ol type="1" id="1eb5a371-16a0-80e0-bb58-d1f2e028ca33" class="numbered-list" start="3"><li>Some useful test and debug tricks:<ol type="a" id="1eb5a371-16a0-80eb-bb27-c1ce75b8ef51" class="numbered-list" start="1"><li>Check Mavlink connections when PX4 is running in wsl. In QGC, ‘Analyze Tools’ → MAVLink Console:  &gt;pxh: mavlink status (return all open connections from px4 end)</li></ol><ol type="a" id="1ed5a371-16a0-80cc-b55a-ef8acd321ad9" class="numbered-list" start="2"><li>In wsl side, return your local windows ip: cat /etc/resolv.conf | grep nameserver</li></ol><ol type="a" id="1ed5a371-16a0-80c3-88a8-c78c68816396" class="numbered-list" start="3"><li>Listen on one port all communication info:<ol type="i" id="1ed5a371-16a0-8026-8c1b-c33ab449af6d" class="numbered-list" start="1"><li>sudo apt install tcpdump  # with tcpdump</li></ol><ol type="i" id="1ed5a371-16a0-805a-a2cd-f6f8ed390163" class="numbered-list" start="2"><li>sudo tcpdump -i any tcp port 4560 (the tcp port we use)<ol type="1" id="1ed5a371-16a0-8085-a812-ef548da810e9" class="numbered-list" start="1"><li>you are expecting returns like: lo    In  IP localhost.18570 &gt; localhost.14550: UDP, length 44 [Notice the lo mark in front, it shows the connection status, lo: loopback]</li></ol><ol type="1" id="1ed5a371-16a0-802b-be19-f67f21ddd266" class="numbered-list" start="2"><li>[or]eth0   Out IP 172.26.74.211.18570 &gt; LAPTOP-MSVAT609.mshome.net.18570: UDP, length 40 [have established a link loop connecting outside]</li></ol></li></ol><ol type="i" id="1ed5a371-16a0-80db-a57b-eeba6877a31a" class="numbered-list" start="3"><li>[or] sudo tcpdump -i any udp port 14560 (the udp port use to connect with QGC)</li></ol><ol type="i" id="1ed5a371-16a0-8054-b3e4-d1b02cbe3883" class="numbered-list" start="4"><li>[or on windows side] netstat -an | find &quot;14560”</li></ol></li></ol><ol type="a" id="1ee5a371-16a0-80b8-92d0-c233ba2ebc33" class="numbered-list" start="4"><li><strong><a href="https://docs.qgroundcontrol.com/master/en/qgc-user-guide/analyze_view/mavlink_inspector.html#mavlink-inspector">MAVLink Inspector</a></strong><strong> in QGC</strong></li></ol></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
