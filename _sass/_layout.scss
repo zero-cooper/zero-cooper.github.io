@@ -72,3 +72,42 @@
   padding-left: $grid-gutter;
   vertical-align: top;
 }
+
+.top-buttons-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-buttons {
+  max-width: 700px; /* match your main content width */
+  margin: 0 auto;   /* center horizontally */
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-buttons a {
+  flex: 1;
+  text-align: center;
+  color: white;
+  background-color: rgba(68, 68, 68, 0.7);
+  padding: 15px 0;
+  text-decoration: none;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.top-buttons a:last-child {
+  border-right: none;
+}
+
+.top-buttons a:hover {
+  background-color: rgba(102, 102, 102, 0.9);
+}
