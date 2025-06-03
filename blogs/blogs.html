@@ -1,0 +1,111 @@
+---
+layout: default
+title: Blog
+permalink: /blogs.html
+---
+<style>
+.blog-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Always 2 equal columns */
+  gap: 30px;
+  max-width: 1000px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+}
+
+.blog-card h3 {
+  padding: 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  background: #f7f7f7;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-grow: 1;
+}
+.top-buttons-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-buttons {
+  max-width: 700px; /* match your main content width */
+  margin: 0 auto;   /* center horizontally */
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-buttons a {
+  flex: 1;
+  text-align: center;
+  color: white;
+  background-color: rgba(68, 68, 68, 0.7);
+  padding: 15px 0;
+  text-decoration: none;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.top-buttons a:last-child {
+  border-right: none;
+}
+
+.top-buttons a:hover {
+  background-color: rgba(102, 102, 102, 0.9);
+}
+
+
+</style>
+
+
+<!-- Include the top navigation bar -->
+<div class="top-buttons-wrapper">
+  <div class="top-buttons">
+    <a href="/">Bio</a>
+    <a href="#career">Career</a>
+    <a href="#Teaching">Teaching</a>
+    <a href="/blogs.html">Blogs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<div style="height: 20px;"></div>
+
+<div class="blog-container">
+  <a class="blog-card" href="/blogs/Robotic_Research_on_Windows/Pegasus_for_IsaacSimWindows.html">
+    <h3>[Blog] Adapting Pegasus with IsaacSim Windows Tutorial</h3>
+    <img src="\blogs\Robotic_Research_on_Windows\1746741192006.png" alt="Post 1 preview">
+  </a>
+
+  <!-- Add more blog cards dynamically in the same pattern -->
+</div>
