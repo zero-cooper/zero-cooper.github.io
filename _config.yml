@@ -11,27 +11,36 @@ sass:
 # Resume settings
 resume_avatar:                  "true"
 resume_name:                    "Ziyue Chu"
-resume_title:                   "Artificial Intelligence Research Engineer"
+resume_title:                   "Machine Learning Research Engineer"
 
 # used for the contact button in _layouts/resume.html
 resume_contact_email:           "zero-cooper@foxmail.com"
 
 # the next two items are used for schema itemprops in _layouts/resume.html
-resume_contact_telephone:       "+(86) 17751034681"
-resume_contact_address:         "Room A308, Changyang Campus, 1687 Changyang Rd., Shanghai, China"
+resume_contact_telephone:       "+(44) 07785702249"
+resume_contact_address:         "Office 218, School of Computer Science, University of Birmingham, UK"
 
-resume_header_contact_info:     "Room A308, Changyang Campus, 1687 Changyang Rd., Shanghai, China <br> 
-                                zero-cooper@foxmail.com | +(86) 17751034681 "
+resume_header_contact_info:     "Office 218, School of Computer Science, University of Birmingham, UK<br> 
+                                zero-cooper@foxmail.com | +(44) 07785702249 "
 display_header_contact_info:    "true"
 
-resume_header_intro: "<p>Informatics postgraduated student with solid math background and rich project programming experience. Looking for an AI research job or further Ph.D. study.
-<br> </p>
-<p>I am interested in solving control problems with RL, especially in the joint field with optimum control theory. The topics include but not limited to&#58 <br>
+resume_header_intro: "<p>
+Ph.D. researcher with theoretical foundation and project experience in <strong>multi-agent learning</strong>. Open to collaborations on scalable multi-agent systems.
+</p>
+
+<p>
+I focus on 2 aspects of multi-agent learning: <strong>Learning Efficiency</strong> and <strong>Social Efficiency</strong>. The first concerns how much it costs to obtain an answer, and the second concerns how good the answer is in the system view. 
+</p>
+<p>
+As a solution to multi-agent scalability issue, I am interested in <strong>online decentralized</strong> learning algorithms with <strong>theoretical guarantees</strong>. I am also keen on translating the theoretical advances into real-world applications. 
+</p>
+<p>
+My research interests include: 
 <ul>
-  <li>Industrial control with reliable and interpretable RL</li>
-  <li>Game AI, probabilistic RL agents in Board Games</li>
-  <li>Multi-agent cooperation and competition in the view of game theory</li>
-</ul>  
+  <li>Multi-agent (reinforcement) learning theory with networked info</li>
+  <li>Game-theoretic learning for socially efficient cooperation</li>
+  <li>Intelligent decision-making for smart-city transportation (e.g., next-generation scalable robotaxi services)</li>
+</ul>
 </p>"
 
 # use "yes" to display the email contact button,
@@ -43,12 +52,12 @@ resume_looking_for_work:        "yes"
 # Decide which sections to use
 # comment out to hide
 # resume_section_interests:       true
-resume_section_education:       true
-resume_section_experience:      true
-resume_section_links:     true
-resume_section_projects:        true
-resume_section_skills:          true
-resume_section_recognition:     true
+# resume_section_education:       true
+# resume_section_experience:      true
+# resume_section_links:     true
+# resume_section_projects:        true
+# resume_section_skills:          true
+# resume_section_recognition:     true
 # resume_section_associations:    true
 
 
