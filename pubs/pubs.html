@@ -1,0 +1,795 @@
+---
+title: pubs
+permalink: /pubs.html
+---
+
+<!DOCTYPE html>
+<html>
+
+<style>
+.top-buttons-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.top-buttons {
+  max-width: 700px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.top-buttons a {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(68, 68, 68, 0.7);
+  text-align: center;
+  text-decoration: none;
+  padding: 2px 4px;
+  font-size: clamp(8px, 1.8vw, 13px);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.top-buttons a:last-child {
+  border-right: none;
+}
+
+.top-buttons a:hover {
+  background-color: rgba(102, 102, 102, 0.9);
+}
+
+
+/* Compact Publications List */
+.publications-list {
+  list-style: none;
+  /* Prevent browser from auto-adjusting scroll when content changes */
+  overflow-anchor: none;
+}
+
+/* All publications */
+.publication {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1rem;
+  margin: 0 0 0.7rem 0;
+  padding: 1.2rem;
+  margin-left: -3.1rem;
+  margin-right: -0.6rem;
+
+  background: #ffffff;
+  border: 1px solid #DCE7F4;
+  border-radius: 6px;
+
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Consistent hover effect for all publications */
+.publication:hover {
+  background: #DFEBF8;
+  box-shadow: 0 2px 6px rgba(46, 95, 163, 0.08);
+}
+
+/* Featured publications retain only the blue accent */
+.publication.featured {
+  background: #EAF2FB;
+  border-left: 3px solid var(--primary);
+}
+
+.publication.featured:hover {
+  background: #DFEBF8;
+}
+
+.publication:last-child {
+  margin-bottom: 0;
+}
+
+.publication.hidden {
+  display: none;
+}
+
+/* Subtle fade-in animation for newly appearing publications */
+@keyframes subtleFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.publication.filter-animate {
+  animation: subtleFadeIn 0.3s ease-out forwards;
+}
+
+.pub-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.pub-image img,
+.pub-image video {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(var(--image-scale, 1));
+  border-radius: 3px;
+  opacity: 1;
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+
+.pub-image:hover img,
+.pub-image:hover video {
+  transform: scale(1.25);
+}
+
+.pub-image img.loaded,
+.pub-image video.loaded {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Placeholder for publications without images */
+.pub-placeholder {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 3px;
+  border: 1px solid var(--border-light);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+}
+
+.pub-placeholder svg {
+  width: 40%;
+  height: 40%;
+  color: #adb5bd;
+  opacity: 0.5;
+}
+
+.pub-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: #2563a6;
+  color: #ffffff;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+
+.pub-badge.in-review {
+  background: #f59e0b;
+  color: white;
+}
+
+.pub-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pub-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.pub-title a {
+  color: var(--text-dark);
+}
+
+.pub-title a:hover {
+  color: var(--link-color);
+}
+
+.pub-authors {
+  color: var(--text-medium);
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.pub-authors .me {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pub-venue {
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.pub-venue-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-style: italic;
+}
+
+.pub-venue-link:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.pub-venue .year {
+  color: var(--text-medium);
+  margin-left: 0.3rem;
+  font-style: normal;
+}
+
+.pub-award {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.pub-acceptance-rate {
+  color: var(--text-medium);
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+  font-style: normal;
+}
+
+.pub-also-presented {
+  color: var(--text-medium);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.pub-tldr {
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  background: #f9f9f9;
+  border-left: 2px solid var(--primary-light);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.pub-tldr strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.pub-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: #f0f0f0;
+  color: var(--text-dark);
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.pub-link {
+  font-size: 0.85rem;
+  color: var(--link-color);
+  font-weight: 500;
+}
+
+.pub-link:hover {
+  text-decoration: underline;
+}
+
+/* Publication media coverage */
+.pub-media {
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.pub-media strong {
+  color: var(--text-medium);
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.pub-media-link {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pub-media-link:hover {
+  text-decoration: underline;
+}
+
+.pub-highlight {
+  display: inline-block;
+  margin: 0.15rem 0.25rem 0.15rem 0;
+  padding: 0.15rem 0.4rem;
+
+  background-color: #FEF3C7;
+  color: #92400E;
+
+  border: 1px solid #FDE3A7;
+  border-radius: 3px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+}
+
+/* Compact typography and left spacing for Awards */
+.resume-item.award-item h3.resume-item-title {
+  font-size: 1.1rem !important;
+  line-height: 0.8 !important;
+  margin-left: 2.5rem;
+}
+
+.resume-item.award-item h4.resume-item-details {
+  font-size: 0.9rem !important;
+  line-height: 0.5 !important;
+  margin-left: 2.5rem;
+}
+
+</style>
+
+{% include head.html %}
+
+<body class="theme-default">
+<!-- CAREER PAGE TEST -->
+  <div class="top-buttons-wrapper">
+    <div class="top-buttons">
+      <a href="/">Research Interest (Home)</a>
+      <a href="/career.html">Education & Professional Career</a>
+      <a href="/blogs.html">Blogs</a>
+      <a href="/pubs.html">Publication & Awards</a>
+      <a href="/teaching.html">Teaching & Social Service</a>
+    </div>
+  </div>
+
+  <div style="height: 80px;"></div>
+
+    <div class="wrapper" itemscope itemtype="http://schema.org/Person">
+      <!-- begin Links -->
+      <section class="content-section">
+
+        <header class="section-header">
+          <h2>Publications</h2>
+        </header>
+
+<ul class="publication-list">
+
+  {% assign publications = site.data.publications | sort: "year" | reverse %}
+
+  {% for pub in publications %}
+
+  <li class="publication{% if pub.featured %} featured{% endif %}"
+      data-topics="{{ pub.topics | join: ' ' | escape }}"
+      data-type="{{ pub.type | join: ' ' | escape }}">
+
+    <!-- Preview image -->
+<div class="pub-image">
+  <img
+    src="{{ '/pubs/' | append: pub.folder | append: '/preview.png' | relative_url }}"
+    alt="{{ pub.title | escape }}"
+    class="pub-thumbnail"
+    style="--image-scale: {{ pub.image_scale | default: 1.0 }};"
+    loading="lazy"
+  >
+
+  {% if pub.featured %}
+    <span class="pub-badge">Featured</span>
+  {% endif %}
+</div>
+
+    <!-- Publication details -->
+    <div class="pub-content">
+
+      <h3 class="pub-title">
+        {% if pub.paper_link %}
+          <a href="{{ pub.paper_link }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            {{ pub.title | escape }}
+          </a>
+        {% else %}
+          {{ pub.title | escape }}
+        {% endif %}
+      </h3>
+
+      <!-- Authors -->
+      <div class="pub-authors">
+        {% assign authors = pub.authors | split: ", " %}
+
+        {% for author in authors %}
+          {% assign author_name = author | remove: "*" | strip %}
+
+          {% if author_name == pub.me %}
+            <span class="me">{{ author | escape }}</span>
+          {% else %}
+            {{ author | escape }}
+          {% endif %}
+
+          {% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </div>
+
+      <!-- Venue and year -->
+      <div class="pub-venue">
+
+        {% if pub.venue_link %}
+          <a href="{{ pub.venue_link }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="pub-venue-link">
+            {{ pub.venue | escape }}
+          </a>
+        {% else %}
+          {{ pub.venue | escape }}
+        {% endif %}
+
+        {% if pub.year %}
+          <span class="year">{{ pub.year | escape}}</span>
+        {% endif %}
+
+        {% if pub.highlight %}
+        {% for high in pub.highlight %}
+          <span class="pub-highlight">{{ high}}</span>
+        {% endfor %}
+        {% endif %}
+
+      </div>
+
+      <!-- Topic tags -->
+      {% if pub.topics and pub.topics.size > 0 %}
+        <div class="pub-tags">
+          {% for topic in pub.topics %}
+            <span class="pub-tag">{{ topic | escape }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Resource links -->
+      <div class="pub-links">
+
+          {% if pub.paper_link %}
+            {% assign paper_url = pub.paper_link %}
+            {% unless paper_url contains '://' %}
+              {% assign paper_url = '/pubs/' | append: pub.folder | append: '/' | append: paper_url | relative_url %}
+            {% endunless %}
+            <a href="{{ paper_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📄 Paper
+            </a>
+          {% endif %}
+
+          {% if pub.code_link %}
+            {% assign code_url = pub.code_link %}
+            {% unless code_url contains '://' %}
+              {% assign code_url = '/pubs/' | append: pub.folder | append: '/' | append: code_url | relative_url %}
+            {% endunless %}
+            <a href="{{ code_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              💻 Code
+            </a>
+          {% endif %}
+
+          {% if pub.project_link %}
+            {% assign project_url = pub.project_link %}
+            {% unless project_url contains '://' %}
+              {% assign project_url = '/pubs/' | append: pub.folder | append: '/' | append: project_url | relative_url %}
+            {% endunless %}
+            <a href="{{ project_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              🔗 Project
+            </a>
+          {% endif %}
+
+          {% if pub.supplementary_link %}
+            {% assign supplementary_url = pub.supplementary_link %}
+            {% unless supplementary_url contains '://' %}
+              {% assign supplementary_url = '/pubs/' | append: pub.folder | append: '/' | append: supplementary_url | relative_url %}
+            {% endunless %}
+            <a href="{{ supplementary_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📎 Supplementary
+            </a>
+          {% endif %}
+
+          {% if pub.slides_link %}
+            {% assign slides_url = pub.slides_link %}
+            {% unless slides_url contains '://' %}
+              {% assign slides_url = '/pubs/' | append: pub.folder | append: '/' | append: slides_url | relative_url %}
+            {% endunless %}
+            <a href="{{ slides_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📊 Slides
+            </a>
+          {% endif %}
+
+      </div>
+
+    </div>
+
+  </li>
+
+  {% endfor %}
+
+</ul>
+
+<!-- begin Links -->
+  <div class="resume-item">
+    <ul class="resume-item-list">
+      {% for link in site.data.links %}
+      <li><a href={{ link.url }} itemprop="url">{{ link.description }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</section>
+<!-- end Links -->
+
+
+<!--AWARDS STARTS HERE-->
+
+      <!-- begin Links -->
+      <section class="content-section">
+
+        <header class="section-header">
+          <h2>Awards & Certificates</h2>
+        </header>
+
+<ul class="publication-list">
+
+  {% assign awards = site.data.awards | sort: "year" | reverse %}
+
+  {% for pub in awards %}
+
+  <li class="publication{% if pub.featured %} featured{% endif %}"
+      data-topics="{{ pub.topics | join: ' ' | escape }}"
+      data-type="{{ pub.type | join: ' ' | escape }}">
+
+    <!-- Preview image -->
+<div class="pub-image">
+  <img
+    src="{{ '/pubs/' | append: pub.folder | append: '/preview.png' | relative_url }}"
+    alt="{{ pub.title | escape }}"
+    class="pub-thumbnail"
+    style="--image-scale: {{ pub.image_scale | default: 1.0 }};"
+    loading="lazy"
+  >
+
+  {% if pub.featured %}
+    <span class="pub-badge">Featured</span>
+  {% endif %}
+</div>
+
+    <!-- Publication details -->
+    <div class="pub-content">
+
+      <h3 class="pub-title">
+        {% if pub.paper_link %}
+          <a href="{{ pub.paper_link }}"
+             target="_blank"
+             rel="noopener noreferrer">
+            {{ pub.title | escape }}
+          </a>
+        {% else %}
+          {{ pub.title | escape }}
+        {% endif %}
+      </h3>
+
+      <!-- Authors -->
+      <div class="pub-authors">
+        {% assign authors = pub.authors | split: ", " %}
+
+        {% for author in authors %}
+          {% assign author_name = author | remove: "*" | strip %}
+
+          {% if author_name == pub.me %}
+            <span class="me">{{ author | escape }}</span>
+          {% else %}
+            {{ author | escape }}
+          {% endif %}
+
+          {% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      </div>
+
+      <!-- Venue and year -->
+      <div class="pub-venue">
+
+        {% if pub.venue_link %}
+          <a href="{{ pub.venue_link }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="pub-venue-link">
+            {{ pub.venue | escape }}
+          </a>
+        {% else %}
+          {{ pub.venue | escape }}
+        {% endif %}
+
+        {% if pub.year %}
+          <span class="year">{{ pub.year | escape}}</span>
+        {% endif %}
+
+        {% if pub.highlight %}
+        {% for high in pub.highlight %}
+          <span class="pub-highlight">{{ high}}</span>
+        {% endfor %}
+        {% endif %}
+
+      </div>
+
+      <!-- Topic tags -->
+      {% if pub.topics and pub.topics.size > 0 %}
+        <div class="pub-tags">
+          {% for topic in pub.topics %}
+            <span class="pub-tag">{{ topic | escape }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Resource links -->
+      <div class="pub-links">
+
+          {% if pub.paper_link %}
+            {% assign paper_url = pub.paper_link %}
+            {% unless paper_url contains '://' %}
+              {% assign paper_url = '/pubs/' | append: pub.folder | append: '/' | append: paper_url | relative_url %}
+            {% endunless %}
+            <a href="{{ paper_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📄 Paper
+            </a>
+          {% endif %}
+
+          {% if pub.code_link %}
+            {% assign code_url = pub.code_link %}
+            {% unless code_url contains '://' %}
+              {% assign code_url = '/pubs/' | append: pub.folder | append: '/' | append: code_url | relative_url %}
+            {% endunless %}
+            <a href="{{ code_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              💻 Code
+            </a>
+          {% endif %}
+
+          {% if pub.project_link %}
+            {% assign project_url = pub.project_link %}
+            {% unless project_url contains '://' %}
+              {% assign project_url = '/pubs/' | append: pub.folder | append: '/' | append: project_url | relative_url %}
+            {% endunless %}
+            <a href="{{ project_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              🔗 Project
+            </a>
+          {% endif %}
+
+          {% if pub.supplementary_link %}
+            {% assign supplementary_url = pub.supplementary_link %}
+            {% unless supplementary_url contains '://' %}
+              {% assign supplementary_url = '/pubs/' | append: pub.folder | append: '/' | append: supplementary_url | relative_url %}
+            {% endunless %}
+            <a href="{{ supplementary_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📎 Supplementary
+            </a>
+          {% endif %}
+
+          {% if pub.slides_link %}
+            {% assign slides_url = pub.slides_link %}
+            {% unless slides_url contains '://' %}
+              {% assign slides_url = '/pubs/' | append: pub.folder | append: '/' | append: slides_url | relative_url %}
+            {% endunless %}
+            <a href="{{ slides_url }}"
+              class="pub-link"
+              target="_blank"
+              rel="noopener noreferrer">
+              📊 Slides
+            </a>
+          {% endif %}
+
+      </div>
+
+    </div>
+
+  </li>
+
+  {% endfor %}
+
+</ul>
+
+<!-- begin awards_List -->
+{% for awards in site.data.awards_list %}
+  <div class="resume-item award-item">
+    <h3 class="resume-item-title" itemprop="award">{{ awards.award }}</h3>
+    <h4 class="resume-item-details">{{ awards.organization }} &bull; {{ awards.year }}</h4>
+  </div>
+{% endfor %}
+
+
+</section>
+<!-- end Links -->
+      
+  </div>
+
+</body>
+</html>
