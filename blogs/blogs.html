@@ -47,30 +47,45 @@ permalink: /blogs.html
 .top-buttons-wrapper {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  height: 50px;
   z-index: 1000;
 
   background-color: transparent;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
 }
 
 .top-buttons {
-  max-width: 700px; /* match your main content width */
-  margin: 0 auto;   /* center horizontally */
+  max-width: 700px;
+  height: 100%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
 }
 
 .top-buttons a {
   flex: 1;
-  text-align: center;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: white;
   background-color: rgba(68, 68, 68, 0.7);
-  padding: 15px 0;
+  text-align: center;
   text-decoration: none;
-  border: none;
+
+  padding: 2px 4px;
+  font-size: clamp(8px, 1.8vw, 13px);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
 }
@@ -90,11 +105,11 @@ permalink: /blogs.html
 <!-- Include the top navigation bar -->
 <div class="top-buttons-wrapper">
   <div class="top-buttons">
-    <a href="/">Bio</a>
-    <a href="#career">Career</a>
-    <a href="#Teaching">Teaching</a>
+    <a href="/">Research Interest (Home)</a>
+    <a href="/career.html">Education & Professional Career</a>
     <a href="/blogs.html">Blogs</a>
-    <a href="#contact">Contact</a>
+    <a href="/pubs.html">Publication & Awards</a>
+    <a href="/teaching.html">Teaching & Social Service</a>
   </div>
 </div>
 
@@ -106,7 +121,8 @@ permalink: /blogs.html
     <img src="\blogs\Robotic_Research_on_Windows\1746741192006.png" alt="Post 1 preview">
   </a>
 
-<a class="blog-card" href="/blogs/PrELIN/CDC2025_PreSlides.pdf">
+<!--
+  <a class="blog-card" href="/blogs/PrELIN/CDC2025_PreSlides.pdf">
     <h3>Provably Efficient Local-Information Networked MARL</h3>
     <img src="\blogs\PrELIN\preview.png" alt="Post 2 preview">
   </a>
@@ -116,5 +132,6 @@ permalink: /blogs.html
     <img src="\blogs\FedAGC\preview.png" alt="Post 3 preview">
   </a>
 
+-->
   <!-- Add more blog cards dynamically in the same pattern -->
 </div>
