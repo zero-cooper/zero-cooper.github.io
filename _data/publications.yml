@@ -1,0 +1,54 @@
+- folder: FedAGC
+  title: "Value Aggregation with Uncertainty in Online Decentralized MARL"
+  paper_link: "https://openreview.net/forum?id=4QpCJukdjq"
+  venue: "43rd International Conference on Machine Learning (ICML)"
+  venue_link: "https://icml.cc/virtual/2026/poster/66352"
+  slides_link: "/ICML26Slides.pdf"
+  year: 2026
+  authors: "Ziyue Chu*, Leonardo Stella"
+  me: "Ziyue Chu"
+  type:
+    - peer-reviewed
+    - all-archival
+    - featured
+  topics:
+    - MARL Theory
+  featured: true
+  image_scale: 1.00
+
+- folder: PrELIN
+  title: "PrELIN: Provably Efficient Local-Information Networked Multi-Agent Reinforcement Learning"
+  paper_link: "https://pure-oai.bham.ac.uk/ws/portalfiles/portal/274213230/Sample_complexity_analysis_for_PrELIN_final.pdf"
+  venue: "64th IEEE Conference on Decision and Control (CDC)"
+  venue_link: "https://css.paperplaza.net/images/temp/CDC/CDC25_ContentListMedia_3.html#fra08_04"
+  slides_link: "/CDC2025_PreSlides.pdf"
+  year: 2025
+  authors: "Ziyue Chu*, Sharu Theresa Jose and Leonardo Stella"
+  me: "Ziyue Chu"
+  type:
+    - peer-reviewed
+    - all-archival
+    - featured
+  topics:
+    - MARL Theory
+  featured: true
+  image_scale: 1.00
+
+- folder: safeMARLSwitch
+  title: "An Adaptive Safe Reinforcement Learning Strategy for Multi-Agent Switched Systems"
+  paper_link: "https://pure-oai.bham.ac.uk/ws/portalfiles/portal/306814966/_2025_IFAC_An_Adaptive_Safe_Reinforcement_Learning_Strategy_for_Multi_Agent_Switched_Systems_v2.pdf"
+  venue: "23rd International Federation of Automatic Control World Congress (IFAC)"
+  venue_link: "https://ifac2026.org/fairDash.do"
+  slides_link: "/An_Adaptive_Safe_Reinforcement_Learning_Strategy_for_Multi_Agent_Switched_Systems.pdf"
+  year: 2026
+  authors: "Chrystian Pool Edmundo Yuca Huanca*, Ziyue Chu, Leonardo Stella, Gian Paolo Incremona, Patrizio Colaneri"
+  me: "Ziyue Chu"
+  type:
+    - peer-reviewed
+    - all-archival
+  topics:
+    - Application--safe_MARL
+  featured: false
+  image_scale: 1.00
+
+  
