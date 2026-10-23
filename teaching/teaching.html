@@ -1,0 +1,132 @@
+---
+title: teaching
+permalink: /teaching.html
+---
+
+<!DOCTYPE html>
+<html>
+
+<style>
+.top-buttons-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.top-buttons {
+  max-width: 700px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.top-buttons a {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(68, 68, 68, 0.7);
+  text-align: center;
+  text-decoration: none;
+  padding: 2px 4px;
+  font-size: clamp(8px, 1.8vw, 13px);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.top-buttons a:last-child {
+  border-right: none;
+}
+
+.top-buttons a:hover {
+  background-color: rgba(102, 102, 102, 0.9);
+}
+
+.cv-list li {
+  margin-bottom: 0.5rem;
+}
+</style>
+
+{% include head.html %}
+
+<body class="theme-default">
+<!-- CAREER PAGE TEST -->
+  <div class="top-buttons-wrapper">
+    <div class="top-buttons">
+      <a href="/">Research Interest (Home)</a>
+      <a href="/career.html">Education & Professional Career</a>
+      <a href="/blogs.html">Blogs</a>
+      <a href="/pubs.html">Publication & Awards</a>
+      <a href="/teaching.html">Teaching & Social Service</a>
+    </div>
+  </div>
+
+  <div style="height: 80px;"></div>
+
+    <div class="wrapper" itemscope itemtype="http://schema.org/Person">
+      <!-- begin Links -->
+<header class="section-header">
+  <h2>Teaching</h2>
+</header>
+
+<ul class="cv-list">
+  <li>
+    <strong>Teaching Assistant, University of Birmingham (2024–2027).</strong>
+    Taught <em>AI1</em>, <em>Computational Vision and Imaging</em>, and
+    <em>AI2</em> in 2024–2025; <em>Game Theory</em> and <em>AI2</em>
+    in 2025–2026; and <em>AI2</em> in 2026–2027 at the School of
+    Computer Science.
+  </li>
+  <li>
+    <strong>Tutor, SuperProf. (2019–2022).</strong>
+    Tutored <em>Machine Learning</em> and <em>A-level Mathematics</em>.
+  </li>
+  <li>
+    <strong>Workshop Organization Committee Member (2026).</strong>
+    Support and host the <em>Workshop: Game Theory in the Era of AI</em> at the University
+    of Birmingham, 13–15 May 2026.
+  </li>
+  <li>
+    <strong>Master's Project Co-supervisor (2024).</strong>
+    Co-supervised a project on <em>Decentralized MARL and Its Application
+    to the UAV Swarm Area Coverage Problem</em> (Grade A+).
+  </li>
+</ul>
+
+<header class="section-header">
+  <h2>Social Service</h2>
+</header>
+
+<ul class="cv-list">
+  <li>
+    <strong>Peer Reviewer</strong> for premier AI and control conferences, such as ICML 2026, AAMAS 2026, and CDC 2024-2025; invited reviewer for NeurIPS 2026.
+  </li>
+  <li>
+    <strong>Student Society Leadership (2014-2018).</strong>
+    Served as Vice President of the University <em>Model United Nations
+    Association</em> and Academic Director for MUN conferences on socioeconomic topics.
+  </li>
+  <li>
+    <strong>Honorary Manager, Research Department (2020-2021).</strong>
+    Supported a student startup with strategic guidance and research management.
+  </li>
+</ul>
+      </section>
+  </div>
+
+</body>
+</html>
