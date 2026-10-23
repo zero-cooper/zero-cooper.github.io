@@ -1,0 +1,17 @@
+- folder: MOASEI
+  title: "Efficient Quasi-optimal Solution for Ride Sharing Task"
+  venue: "Ride Sharing Task for MOASEI Competition at AAMAS"
+  venue_link: "https://oasys-mas.github.io/moasei.html"
+  slides_link: "/AAMAS26CompetitionSlides_Ridesharing.pdf"
+  year: 2026
+  authors: "Ziyue Chu*, Leonardo Stella"
+  me: "Ziyue Chu"
+  highlight:
+    - Winner Award
+  topics:
+    - Application--RideSharing
+  featured: false
+  image_scale: 1.00
+
+
+  
