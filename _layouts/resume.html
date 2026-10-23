@@ -54,6 +54,33 @@
 .top-buttons a:hover {
   background-color: rgba(102, 102, 102, 0.9);
 }
+
+.profile-photo {
+    float: right;
+    width: 120px;
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+
+    -webkit-mask:
+        linear-gradient(to right, transparent, #000 11%, #000 88%, transparent),
+        linear-gradient(to bottom, transparent, #000 11%, #000 88%, transparent);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+
+.profile-photo img {
+    position: absolute;
+    width: 130%;
+    height: auto;
+    top: -3px;
+    left: -10px;
+
+    /* Crop more from the right and bottom */
+    clip-path: inset(0 15px 19px 0);
+}
+
 </style>
 
 
