@@ -65,14 +65,14 @@ permalink: /pubs.html
 }
 
 /* All publications */
-/* All publications */
 .publication {
   display: grid;
-  grid-template-columns: clamp(100px, 30%, 240px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
   gap: 1rem;
   margin: 0 0 0.7rem 0;
-  padding: 1.2rem;
+  padding: 1rem;
 
+  /* Reduce excessive blank space */
   margin-left: -3.1rem;
   margin-right: -0.6rem;
 
@@ -82,6 +82,10 @@ permalink: /pubs.html
   box-sizing: border-box;
 
   transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.publication > * {
+  min-width: 0;
 }
 
 .publication > * {
@@ -400,10 +404,12 @@ permalink: /pubs.html
 @media screen and (max-width: 600px) {
   .publication {
     grid-template-columns: minmax(0, 1fr);
+    /*
     gap: 0.75rem;
     padding: 0.8rem;
     margin-left: -2.5rem;
-    margin-right: -0.5rem;
+    margin-right: -0.2rem;
+    */
   }
 
   .pub-image {
