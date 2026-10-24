@@ -58,16 +58,19 @@ permalink: /career.html
 
 .profile-photo {
     float: right;
-    width: 112.5px;
-    height: 130px;
+    width: 120px;
+    height: 140px;
     overflow: hidden;
     position: relative;
 
-    -webkit-mask:
+    -webkit-mask-image:
         linear-gradient(to right, transparent, #000 11%, #000 88%, transparent),
         linear-gradient(to bottom, transparent, #000 11%, #000 88%, transparent);
-
     -webkit-mask-composite: source-in;
+
+    mask-image:
+        linear-gradient(to right, transparent, #000 11%, #000 88%, transparent),
+        linear-gradient(to bottom, transparent, #000 11%, #000 88%, transparent);
     mask-composite: intersect;
 }
 
