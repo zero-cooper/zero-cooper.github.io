@@ -273,9 +273,14 @@
 
 @media screen and (max-width: 600px) {
   .header-name {
+    display: block;
+    width: 100%;
     white-space: nowrap !important;
     font-size: 20px !important;
-    outline: 2px solid red;
+    letter-spacing: normal;
+    text-align: center;
+    outline: none;
+    overflow: visible;
   }
 
 
